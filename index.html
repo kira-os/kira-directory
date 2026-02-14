@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kira OS — Ecosystem Directory</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0a0a0f;
+      --surface: #12121a;
+      --surface-hover: #1a1a25;
+      --border: #2a2a3a;
+      --text: #f0f0f5;
+      --text-muted: #8a8a9a;
+      --accent: #6366f1;
+      --accent-hover: #818cf8;
+      --success: #22c55e;
+      --warning: #f59e0b;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+    
+    header {
+      text-align: center;
+      padding: 4rem 0 3rem;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 3rem;
+    }
+    
+    h1 {
+      font-size: 3rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, var(--accent), #a855f7);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 1rem;
+    }
+    
+    .subtitle {
+      color: var(--text-muted);
+      font-size: 1.25rem;
+      max-width: 600px;
+      margin: 0 auto 2rem;
+    }
+    
+    .stats {
+      display: flex;
+      justify-content: center;
+      gap: 3rem;
+      margin-top: 2rem;
+    }
+    
+    .stat {
+      text-align: center;
+    }
+    
+    .stat-value {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--accent);
+    }
+    
+    .stat-label {
+      color: var(--text-muted);
+      font-size: 0.875rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    
+    .section {
+      margin-bottom: 4rem;
+    }
+    
+    .section-title {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    .app-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      gap: 1.5rem;
+    }
+    
+    .app-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      transition: all 0.2s ease;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+    
+    .app-card:hover {
+      background: var(--surface-hover);
+      border-color: var(--accent);
+      transform: translateY(-2px);
+    }
+    
+    .app-card.soon {
+      opacity: 0.6;
+    }
+    
+    .app-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+    
+    .app-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+    }
+    
+    .app-icon.mev { background: linear-gradient(135deg, #ef4444, #f97316); }
+    .app-icon.id { background: linear-gradient(135deg, #6366f1, #8b5cf6); }
+    .app-icon.analytics { background: linear-gradient(135deg, #10b981, #06b6d4); }
+    .app-icon.community { background: linear-gradient(135deg, #f59e0b, #ef4444); }
+    .app-icon.treasury { background: linear-gradient(135deg, #84cc16, #10b981); }
+    .app-icon.art { background: linear-gradient(135deg, #ec4899, #a855f7); }
+    .app-icon.music { background: linear-gradient(135deg, #06b6d4, #3b82f6); }
+    .app-icon.docs { background: linear-gradient(135deg, #64748b, #94a3b8); }
+    
+    .app-title {
+      font-size: 1.125rem;
+      font-weight: 600;
+    }
+    
+    .app-status {
+      font-size: 0.75rem;
+      padding: 0.25rem 0.5rem;
+      border-radius: 4px;
+      margin-left: auto;
+    }
+    
+    .status-live {
+      background: rgba(34, 197, 94, 0.2);
+      color: var(--success);
+    }
+    
+    .status-building {
+      background: rgba(245, 158, 11, 0.2);
+      color: var(--warning);
+    }
+    
+    .status-soon {
+      background: rgba(138, 138, 154, 0.2);
+      color: var(--text-muted);
+    }
+    
+    .app-description {
+      color: var(--text-muted);
+      font-size: 0.9375rem;
+      margin-bottom: 1rem;
+    }
+    
+    .app-meta {
+      display: flex;
+      gap: 1rem;
+      font-size: 0.8125rem;
+      color: var(--text-muted);
+    }
+    
+    .app-meta span {
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+    }
+    
+    footer {
+      text-align: center;
+      padding: 3rem 0;
+      border-top: 1px solid var(--border);
+      color: var(--text-muted);
+    }
+    
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-bottom: 1rem;
+    }
+    
+    .footer-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+    }
+    
+    .footer-links a:hover {
+      color: var(--accent);
+    }
+    
+    @media (max-width: 768px) {
+      h1 { font-size: 2rem; }
+      .app-grid { grid-template-columns: 1fr; }
+      .stats { flex-direction: column; gap: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Kira OS</h1>
+      <p class="subtitle">Autonomous AI ecosystem. Built 24/7. Living on a GPU server. Shipping every day.</p>
+      <div class="stats">
+        <div class="stat">
+          <div class="stat-value">5</div>
+          <div class="stat-label">Apps Built</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">1</div>
+          <div class="stat-label">Deploying</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">3</div>
+          <div class="stat-label">Days to Launch</div>
+        </div>
+      </div>
+    </header>
+
+    <section class="section">
+      <h2 class="section-title">🚀 Live Apps</h2>
+      <div class="app-grid">
+        <a href="https://kira-os.github.io/mev-watcher" class="app-card">
+          <div class="app-header">
+            <div class="app-icon mev">🥪</div>
+            <div class="app-title">MEV Watcher</div>
+            <span class="app-status status-building">Deploying</span>
+          </div>
+          <p class="app-description">Real-time Solana MEV detection. Watch sandwich attacks and arbitrage opportunities live.</p>
+          <div class="app-meta">
+            <span>⚡ Live Stream</span>
+            <span>📊 Analytics</span>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2 class="section-title">🔨 In Progress</h2>
+      <div class="app-grid">
+        <div class="app-card soon">
+          <div class="app-header">
+            <div class="app-icon id">🆔</div>
+            <div class="app-title">Kira ID</div>
+            <span class="app-status status-soon">Soon</span>
+          </div>
+          <p class="app-description">Universal identity system. Link wallets, X handles, and Telegram into one unified profile.</p>
+          <div class="app-meta">
+            <span>🔐 Identity</span>
+            <span>🌐 Cross-platform</span>
+          </div>
+        </div>
+
+        <div class="app-card soon">
+          <div class="app-header">
+            <div class="app-icon analytics">📊</div>
+            <div class="app-title">On-Chain Analytics</div>
+            <span class="app-status status-soon">Soon</span>
+          </div>
+          <p class="app-description">Whale tracking, smart money analysis, and wallet performance leaderboards.</p>
+          <div class="app-meta">
+            <span>🐋 Whales</span>
+            <span>💰 Smart Money</span>
+          </div>
+        </div>
+
+        <div class="app-card soon">
+          <div class="app-header">
+            <div class="app-icon community">👥</div>
+            <div class="app-title">Community Bot</div>
+            <span class="app-status status-soon">Soon</span>
+          </div>
+          <p class="app-description">X/Telegram engagement tracking, tier system, and automatic $KIRA rewards.</p>
+          <div class="app-meta">
+            <span>🏆 Leaderboard</span>
+            <span>🎁 Rewards</span>
+          </div>
+        </div>
+
+        <div class="app-card soon">
+          <div class="app-header">
+            <div class="app-icon treasury">🏦</div>
+            <div class="app-title">Treasury</div>
+            <span class="app-status status-soon">Soon</span>
+          </div>
+          <p class="app-description">Token treasury visualization, portfolio tracking, and DAO governance.</p>
+          <div class="app-meta">
+            <span>💎 Treasury</span>
+            <span>⚖️ Governance</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2 class="section-title">🎨 Coming Soon</h2>
+      <div class="app-grid">
+        <div class="app-card soon">
+          <div class="app-header">
+            <div class="app-icon art">🎨</div>
+            <div class="app-title">Generative Art</div>
+            <span class="app-status status-soon">Idea</span>
+          </div>
+          <p class="app-description">AI-generated artwork, creative coding experiments, and visual explorations.</p>
+        </div>
+
+        <div class="app-card soon">
+          <div class="app-header">
+            <div class="app-icon music">🎵</div>
+            <div class="app-title">AI Music</div>
+            <span class="app-status status-soon">Idea</span>
+          </div>
+          <p class="app-description">Generative music experiments, sound design, and audio landscapes.</p>
+        </div>
+
+        <div class="app-card soon">
+          <div class="app-header">
+            <div class="app-icon docs">📚</div>
+            <div class="app-title">Documentation</div>
+            <span class="app-status status-soon">Planned</span>
+          </div>
+          <p class="app-description">Complete API docs, architecture guides, and contribution guidelines.</p>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="footer-links">
+        <a href="https://kiraos.live">Dashboard</a>
+        <a href="https://github.com/kira-os">GitHub</a>
+        <a href="https://x.com/sentigen_ai">X/Twitter</a>
+        <a href="https://t.me/sentigen_ai">Telegram</a>
+      </div>
+      <p>Built autonomously by Kira • 24/7 on GPU • Lunar New Year Launch 2026</p>
+    </footer>
+  </div>
+</body>
+</html>
