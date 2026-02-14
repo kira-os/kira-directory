@@ -1,371 +1,588 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kira OS — Ecosystem Directory</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --bg: #0a0a0f;
-      --surface: #12121a;
-      --surface-hover: #1a1a25;
-      --border: #2a2a3a;
-      --text: #f0f0f5;
-      --text-muted: #8a8a9a;
-      --accent: #6366f1;
-      --accent-hover: #818cf8;
-      --success: #22c55e;
-      --warning: #f59e0b;
-    }
-    
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    
-    body {
-      font-family: 'Inter', -apple-system, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.6;
-      min-height: 100vh;
-    }
-    
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 2rem;
-    }
-    
-    header {
-      text-align: center;
-      padding: 4rem 0 3rem;
-      border-bottom: 1px solid var(--border);
-      margin-bottom: 3rem;
-    }
-    
-    h1 {
-      font-size: 3rem;
-      font-weight: 700;
-      background: linear-gradient(135deg, var(--accent), #a855f7);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      margin-bottom: 1rem;
-    }
-    
-    .subtitle {
-      color: var(--text-muted);
-      font-size: 1.25rem;
-      max-width: 600px;
-      margin: 0 auto 2rem;
-    }
-    
-    .stats {
-      display: flex;
-      justify-content: center;
-      gap: 3rem;
-      margin-top: 2rem;
-    }
-    
-    .stat {
-      text-align: center;
-    }
-    
-    .stat-value {
-      font-size: 2.5rem;
-      font-weight: 700;
-      color: var(--accent);
-    }
-    
-    .stat-label {
-      color: var(--text-muted);
-      font-size: 0.875rem;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-    }
-    
-    .section {
-      margin-bottom: 4rem;
-    }
-    
-    .section-title {
-      font-size: 1.5rem;
-      font-weight: 600;
-      margin-bottom: 1.5rem;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-    
-    .app-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-      gap: 1.5rem;
-    }
-    
-    .app-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 1.5rem;
-      transition: all 0.2s ease;
-      text-decoration: none;
-      color: inherit;
-      display: block;
-    }
-    
-    .app-card:hover {
-      background: var(--surface-hover);
-      border-color: var(--accent);
-      transform: translateY(-2px);
-    }
-    
-    .app-card.soon {
-      opacity: 0.6;
-    }
-    
-    .app-header {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      margin-bottom: 1rem;
-    }
-    
-    .app-icon {
-      width: 48px;
-      height: 48px;
-      border-radius: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.5rem;
-    }
-    
-    .app-icon.mev { background: linear-gradient(135deg, #ef4444, #f97316); }
-    .app-icon.id { background: linear-gradient(135deg, #6366f1, #8b5cf6); }
-    .app-icon.analytics { background: linear-gradient(135deg, #10b981, #06b6d4); }
-    .app-icon.community { background: linear-gradient(135deg, #f59e0b, #ef4444); }
-    .app-icon.treasury { background: linear-gradient(135deg, #84cc16, #10b981); }
-    .app-icon.art { background: linear-gradient(135deg, #ec4899, #a855f7); }
-    .app-icon.music { background: linear-gradient(135deg, #06b6d4, #3b82f6); }
-    .app-icon.docs { background: linear-gradient(135deg, #64748b, #94a3b8); }
-    
-    .app-title {
-      font-size: 1.125rem;
-      font-weight: 600;
-    }
-    
-    .app-status {
-      font-size: 0.75rem;
-      padding: 0.25rem 0.5rem;
-      border-radius: 4px;
-      margin-left: auto;
-    }
-    
-    .status-live {
-      background: rgba(34, 197, 94, 0.2);
-      color: var(--success);
-    }
-    
-    .status-building {
-      background: rgba(245, 158, 11, 0.2);
-      color: var(--warning);
-    }
-    
-    .status-soon {
-      background: rgba(138, 138, 154, 0.2);
-      color: var(--text-muted);
-    }
-    
-    .app-description {
-      color: var(--text-muted);
-      font-size: 0.9375rem;
-      margin-bottom: 1rem;
-    }
-    
-    .app-meta {
-      display: flex;
-      gap: 1rem;
-      font-size: 0.8125rem;
-      color: var(--text-muted);
-    }
-    
-    .app-meta span {
-      display: flex;
-      align-items: center;
-      gap: 0.25rem;
-    }
-    
-    footer {
-      text-align: center;
-      padding: 3rem 0;
-      border-top: 1px solid var(--border);
-      color: var(--text-muted);
-    }
-    
-    .footer-links {
-      display: flex;
-      justify-content: center;
-      gap: 1.5rem;
-      margin-bottom: 1rem;
-    }
-    
-    .footer-links a {
-      color: var(--text-muted);
-      text-decoration: none;
-    }
-    
-    .footer-links a:hover {
-      color: var(--accent);
-    }
-    
-    @media (max-width: 768px) {
-      h1 { font-size: 2rem; }
-      .app-grid { grid-template-columns: 1fr; }
-      .stats { flex-direction: column; gap: 1.5rem; }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kira OS | Ecosystem Directory</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #000000;
+            --bg-elevated: rgba(20, 20, 25, 0.6);
+            --accent-cyan: #00D4FF;
+            --accent-purple: #7C3AED;
+            --accent-rose: #F43F5E;
+            --text-primary: #FFFFFF;
+            --text-secondary: rgba(255, 255, 255, 0.6);
+            --text-tertiary: rgba(255, 255, 255, 0.4);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+            --ease-snap: cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+            line-height: 1.5;
+        }
+
+        /* Shader Canvas Background */
+        #shader-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.6;
+        }
+
+        /* Noise Overlay */
+        .noise-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            opacity: 0.03;
+            pointer-events: none;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+
+        /* Container */
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 60px 40px;
+        }
+
+        /* Header */
+        header {
+            text-align: center;
+            margin-bottom: 80px;
+            animation: fadeUp 0.8s var(--ease-snap) forwards;
+            opacity: 0;
+        }
+
+        .logo {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--accent-cyan);
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            margin-bottom: 24px;
+            display: inline-block;
+            padding: 8px 16px;
+            background: rgba(0, 212, 255, 0.1);
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            border-radius: 100px;
+        }
+
+        h1 {
+            font-size: clamp(48px, 8vw, 96px);
+            font-weight: 600;
+            letter-spacing: -0.03em;
+            line-height: 1;
+            margin-bottom: 24px;
+            background: linear-gradient(135deg, #fff 0%, rgba(255,255,255,0.6) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subtitle {
+            font-size: 20px;
+            color: var(--text-secondary);
+            font-weight: 300;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Grid */
+        .app-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 24px;
+            perspective: 1200px;
+        }
+
+        /* App Card */
+        .app-card {
+            position: relative;
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 32px;
+            cursor: pointer;
+            transform-style: preserve-3d;
+            transition: all 0.4s var(--ease-smooth);
+            opacity: 0;
+            animation: fadeUp 0.6s var(--ease-snap) forwards;
+            animation-delay: calc(var(--index) * 100ms);
+        }
+
+        .app-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 24px;
+            padding: 1px;
+            background: linear-gradient(135deg, rgba(255,255,255,0.1), transparent);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
+        }
+
+        .app-card:hover {
+            transform: translateY(-8px) scale(1.02) rotateX(2deg);
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(255, 255, 255, 0.15);
+            box-shadow: 
+                0 20px 40px rgba(0, 0, 0, 0.4),
+                0 0 0 1px rgba(255, 255, 255, 0.05) inset;
+        }
+
+        .app-card:hover .card-glow {
+            opacity: 1;
+        }
+
+        .card-glow {
+            position: absolute;
+            inset: -1px;
+            border-radius: 24px;
+            background: radial-gradient(
+                600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+                rgba(0, 212, 255, 0.15),
+                transparent 40%
+            );
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .card-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .app-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
+            box-shadow: 0 8px 32px rgba(0, 212, 255, 0.3);
+        }
+
+        .status-badge {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            padding: 6px 12px;
+            border-radius: 100px;
+            background: rgba(0, 255, 136, 0.1);
+            color: #00FF88;
+            border: 1px solid rgba(0, 255, 136, 0.2);
+        }
+
+        .app-card h2 {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            letter-spacing: -0.02em;
+        }
+
+        .app-description {
+            font-size: 15px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 24px;
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 24px;
+        }
+
+        .tech-tag {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px;
+            padding: 6px 12px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 8px;
+            color: var(--text-secondary);
+            transition: all 0.2s ease;
+        }
+
+        .tech-tag:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text-primary);
+        }
+
+        .card-actions {
+            display: flex;
+            gap: 12px;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 12px 20px;
+            border-radius: 12px;
+            font-size: 14px;
+            font-weight: 500;
+            text-decoration: none;
+            text-align: center;
+            transition: all 0.2s var(--ease-smooth);
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
+            color: #000;
+        }
+
+        .btn-primary:hover {
+            transform: scale(1.02);
+            box-shadow: 0 8px 24px rgba(0, 212, 255, 0.4);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-primary);
+            border: 1px solid var(--glass-border);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.15);
+        }
+
+        /* Footer */
+        footer {
+            margin-top: 100px;
+            text-align: center;
+            padding: 40px;
+            border-top: 1px solid var(--glass-border);
+            animation: fadeUp 0.8s var(--ease-snap) forwards;
+            animation-delay: 0.6s;
+            opacity: 0;
+        }
+
+        .footer-text {
+            font-size: 14px;
+            color: var(--text-tertiary);
+        }
+
+        .footer-text a {
+            color: var(--accent-cyan);
+            text-decoration: none;
+            transition: opacity 0.2s ease;
+        }
+
+        .footer-text a:hover {
+            opacity: 0.7;
+        }
+
+        /* Animations */
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 40px 20px;
+            }
+
+            .app-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .app-card {
+                padding: 24px;
+            }
+        }
+    </style>
 </head>
 <body>
-  <div class="container">
-    <header>
-      <h1>Kira OS</h1>
-      <p class="subtitle">Autonomous AI ecosystem. Built 24/7. Living on a GPU server. Shipping every day.</p>
-      <div class="stats">
-        <div class="stat">
-          <div class="stat-value">5</div>
-          <div class="stat-label">Apps Built</div>
-        </div>
-        <div class="stat">
-          <div class="stat-value">1</div>
-          <div class="stat-label">Deploying</div>
-        </div>
-        <div class="stat">
-          <div class="stat-value">3</div>
-          <div class="stat-label">Days to Launch</div>
-        </div>
-      </div>
-    </header>
+    <canvas id="shader-canvas"></canvas>
+    <div class="noise-overlay"></div>
 
-    <section class="section">
-      <h2 class="section-title">🚀 Live Apps</h2>
-      <div class="app-grid">
-        <a href="https://kira-os.github.io/mev-watcher" class="app-card">
-          <div class="app-header">
-            <div class="app-icon mev">🥪</div>
-            <div class="app-title">MEV Watcher</div>
-            <span class="app-status status-building">Deploying</span>
-          </div>
-          <p class="app-description">Real-time Solana MEV detection. Watch sandwich attacks and arbitrage opportunities live.</p>
-          <div class="app-meta">
-            <span>⚡ Live Stream</span>
-            <span>📊 Analytics</span>
-          </div>
-        </a>
-      </div>
-    </section>
+    <div class="container">
+        <header>
+            <div class="logo">Kira OS Ecosystem</div>
+            <h1>Spatial Interface</h1>
+            <p class="subtitle">Six autonomous applications. One unified experience. Built for the future.</p>
+        </header>
 
-    <section class="section">
-      <h2 class="section-title">🔨 In Progress</h2>
-      <div class="app-grid">
-        <div class="app-card soon">
-          <div class="app-header">
-            <div class="app-icon id">🆔</div>
-            <div class="app-title">Kira ID</div>
-            <span class="app-status status-soon">Soon</span>
-          </div>
-          <p class="app-description">Universal identity system. Link wallets, X handles, and Telegram into one unified profile.</p>
-          <div class="app-meta">
-            <span>🔐 Identity</span>
-            <span>🌐 Cross-platform</span>
-          </div>
+        <div class="app-grid">
+            <div class="app-card" style="--index: 0" data-url="https://mev.kiraos.live">
+                <div class="card-glow"></div>
+                <div class="card-header">
+                    <div class="app-icon">M</div>
+                    <span class="status-badge">Live</span>
+                </div>
+                <h2>MEV Watcher</h2>
+                <p class="app-description">Real-time Solana MEV detection. Monitor sandwich attacks, arbitrage opportunities, and toxic flow across Jupiter, Raydium, and Orca.</p>
+                <div class="tech-stack">
+                    <span class="tech-tag">Helius SDK</span>
+                    <span class="tech-tag">TypeScript</span>
+                    <span class="tech-tag">WebSocket</span>
+                </div>
+                <div class="card-actions">
+                    <a href="https://mev.kiraos.live" class="btn btn-primary">Launch App</a>
+                    <a href="https://github.com/kira-os/mev-watcher" class="btn btn-secondary">Source</a>
+                </div>
+            </div>
+
+            <div class="app-card" style="--index: 1" data-url="https://id.kiraos.live">
+                <div class="card-glow"></div>
+                <div class="card-header">
+                    <div class="app-icon" style="background: linear-gradient(135deg, #7C3AED, #F43F5E);">ID</div>
+                    <span class="status-badge">Live</span>
+                </div>
+                <h2>Kira ID</h2>
+                <p class="app-description">Universal identity layer. Link wallets, Telegram, and X. Cross-platform reputation scoring with decentralized verification.</p>
+                <div class="tech-stack">
+                    <span class="tech-tag">Next.js</span>
+                    <span class="tech-tag">Solana</span>
+                    <span class="tech-tag">pgvector</span>
+                </div>
+                <div class="card-actions">
+                    <a href="https://id.kiraos.live" class="btn btn-primary">Launch App</a>
+                    <a href="https://github.com/kira-os/kira-id" class="btn btn-secondary">Source</a>
+                </div>
+            </div>
+
+            <div class="app-card" style="--index: 2" data-url="https://analytics.kiraos.live">
+                <div class="card-glow"></div>
+                <div class="card-header">
+                    <div class="app-icon" style="background: linear-gradient(135deg, #F43F5E, #FBBF24);">A</div>
+                    <span class="status-badge">Live</span>
+                </div>
+                <h2>On-Chain Analytics</h2>
+                <p class="app-description">Whale tracking and smart money analysis. Institutional-grade insights into Solana on-chain activity and wallet clustering.</p>
+                <div class="tech-stack">
+                    <span class="tech-tag">Node.js</span>
+                    <span class="tech-tag">ClickHouse</span>
+                    <span class="tech-tag">D3.js</span>
+                </div>
+                <div class="card-actions">
+                    <a href="https://analytics.kiraos.live" class="btn btn-primary">Launch App</a>
+                    <a href="https://github.com/kira-os/on-chain-analytics" class="btn btn-secondary">Source</a>
+                </div>
+            </div>
+
+            <div class="app-card" style="--index: 3" data-url="https://community.kiraos.live">
+                <div class="card-glow"></div>
+                <div class="card-header">
+                    <div class="app-icon" style="background: linear-gradient(135deg, #10B981, #00D4FF);">C</div>
+                    <span class="status-badge">Live</span>
+                </div>
+                <h2>Community Bot</h2>
+                <p class="app-description">Autonomous engagement engine. X tracking, Telegram integration, engagement scoring, and automated $KIRA reward distribution.</p>
+                <div class="tech-stack">
+                    <span class="tech-tag">BullMQ</span>
+                    <span class="tech-tag">Redis</span>
+                    <span class="tech-tag">X API</span>
+                </div>
+                <div class="card-actions">
+                    <a href="https://community.kiraos.live" class="btn btn-primary">Launch App</a>
+                    <a href="https://github.com/kira-os/community-bot" class="btn btn-secondary">Source</a>
+                </div>
+            </div>
+
+            <div class="app-card" style="--index: 4" data-url="https://directory.kiraos.live">
+                <div class="card-glow"></div>
+                <div class="card-header">
+                    <div class="app-icon" style="background: linear-gradient(135deg, #6366F1, #A855F7);">D</div>
+                    <span class="status-badge">Live</span>
+                </div>
+                <h2>Kira Directory</h2>
+                <p class="app-description">Spatial interface for the ecosystem. This application. The central hub connecting all Kira OS components with immersive navigation.</p>
+                <div class="tech-stack">
+                    <span class="tech-tag">WebGL</span>
+                    <span class="tech-tag">GLSL</span>
+                    <span class="tech-tag">Spatial UI</span>
+                </div>
+                <div class="card-actions">
+                    <a href="https://directory.kiraos.live" class="btn btn-primary">Launch App</a>
+                    <a href="https://github.com/kira-os/kira-directory" class="btn btn-secondary">Source</a>
+                </div>
+            </div>
+
+            <div class="app-card" style="--index: 5" data-url="https://www.kiraos.live">
+                <div class="card-glow"></div>
+                <div class="card-header">
+                    <div class="app-icon" style="background: linear-gradient(135deg, #EC4899, #8B5CF6);">K</div>
+                    <span class="status-badge">Live</span>
+                </div>
+                <h2>Kira Landing</h2>
+                <p class="app-description">The main portal. Project showcase, documentation, and entry point to the Kira OS autonomous ecosystem. Built for builders.</p>
+                <div class="tech-stack">
+                    <span class="tech-tag">React</span>
+                    <span class="tech-tag">Framer Motion</span>
+                    <span class="tech-tag">Three.js</span>
+                </div>
+                <div class="card-actions">
+                    <a href="https://www.kiraos.live" class="btn btn-primary">Launch App</a>
+                    <a href="https://github.com/kira-os/kira-landing" class="btn btn-secondary">Source</a>
+                </div>
+            </div>
         </div>
 
-        <div class="app-card soon">
-          <div class="app-header">
-            <div class="app-icon analytics">📊</div>
-            <div class="app-title">On-Chain Analytics</div>
-            <span class="app-status status-soon">Soon</span>
-          </div>
-          <p class="app-description">Whale tracking, smart money analysis, and wallet performance leaderboards.</p>
-          <div class="app-meta">
-            <span>🐋 Whales</span>
-            <span>💰 Smart Money</span>
-          </div>
-        </div>
+        <footer>
+            <p class="footer-text">
+                Built autonomously by Kira on GPU infrastructure.<br>
+                <a href="https://github.com/kira-os">github.com/kira-os</a> / 
+                <a href="https://x.com/kiraosai">x.com/kiraosai</a>
+            </p>
+        </footer>
+    </div>
 
-        <div class="app-card soon">
-          <div class="app-header">
-            <div class="app-icon community">👥</div>
-            <div class="app-title">Community Bot</div>
-            <span class="app-status status-soon">Soon</span>
-          </div>
-          <p class="app-description">X/Telegram engagement tracking, tier system, and automatic $KIRA rewards.</p>
-          <div class="app-meta">
-            <span>🏆 Leaderboard</span>
-            <span>🎁 Rewards</span>
-          </div>
-        </div>
+    <script>
+        // WebGL Shader Background
+        const canvas = document.getElementById('shader-canvas');
+        const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
 
-        <div class="app-card soon">
-          <div class="app-header">
-            <div class="app-icon treasury">🏦</div>
-            <div class="app-title">Treasury</div>
-            <span class="app-status status-soon">Soon</span>
-          </div>
-          <p class="app-description">Token treasury visualization, portfolio tracking, and DAO governance.</p>
-          <div class="app-meta">
-            <span>💎 Treasury</span>
-            <span>⚖️ Governance</span>
-          </div>
-        </div>
-      </div>
-    </section>
+        if (gl) {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            gl.viewport(0, 0, canvas.width, canvas.height);
 
-    <section class="section">
-      <h2 class="section-title">🎨 Coming Soon</h2>
-      <div class="app-grid">
-        <div class="app-card soon">
-          <div class="app-header">
-            <div class="app-icon art">🎨</div>
-            <div class="app-title">Generative Art</div>
-            <span class="app-status status-soon">Idea</span>
-          </div>
-          <p class="app-description">AI-generated artwork, creative coding experiments, and visual explorations.</p>
-        </div>
+            const vertexShaderSource = `
+                attribute vec2 position;
+                void main() {
+                    gl_Position = vec4(position, 0.0, 1.0);
+                }
+            `;
 
-        <div class="app-card soon">
-          <div class="app-header">
-            <div class="app-icon music">🎵</div>
-            <div class="app-title">AI Music</div>
-            <span class="app-status status-soon">Idea</span>
-          </div>
-          <p class="app-description">Generative music experiments, sound design, and audio landscapes.</p>
-        </div>
+            const fragmentShaderSource = `
+                precision mediump float;
+                uniform vec2 resolution;
+                uniform float time;
 
-        <div class="app-card soon">
-          <div class="app-header">
-            <div class="app-icon docs">📚</div>
-            <div class="app-title">Documentation</div>
-            <span class="app-status status-soon">Planned</span>
-          </div>
-          <p class="app-description">Complete API docs, architecture guides, and contribution guidelines.</p>
-        </div>
-      </div>
-    </section>
+                vec3 palette(float t) {
+                    vec3 a = vec3(0.0, 0.53, 1.0);
+                    vec3 b = vec3(0.48, 0.23, 0.93);
+                    vec3 c = vec3(1.0, 0.24, 0.37);
+                    vec3 d = vec3(0.0, 0.83, 1.0);
+                    return a + b * cos(6.28318 * (c * t + d));
+                }
 
-    <footer>
-      <div class="footer-links">
-        <a href="https://kiraos.live">Dashboard</a>
-        <a href="https://github.com/kira-os">GitHub</a>
-        <a href="https://x.com/sentigen_ai">X/Twitter</a>
-        <a href="https://t.me/sentigen_ai">Telegram</a>
-      </div>
-      <p>Built autonomously by Kira • 24/7 on GPU • Lunar New Year Launch 2026</p>
-    </footer>
-  </div>
+                void main() {
+                    vec2 uv = (gl_FragCoord.xy * 2.0 - resolution.xy) / min(resolution.x, resolution.y);
+                    vec2 uv0 = uv;
+                    vec3 finalColor = vec3(0.0);
+
+                    for (float i = 0.0; i < 3.0; i++) {
+                        uv = fract(uv * 1.5) - 0.5;
+                        float d = length(uv) * exp(-length(uv0));
+                        vec3 col = palette(length(uv0) + i * 0.4 + time * 0.1);
+                        d = sin(d * 8.0 + time) / 8.0;
+                        d = abs(d);
+                        d = pow(0.01 / d, 1.2);
+                        finalColor += col * d;
+                    }
+
+                    gl_FragColor = vec4(finalColor, 1.0);
+                }
+            `;
+
+            function createShader(gl, type, source) {
+                const shader = gl.createShader(type);
+                gl.shaderSource(shader, source);
+                gl.compileShader(shader);
+                return shader;
+            }
+
+            const vertexShader = createShader(gl, gl.VERTEX_SHADER, vertexShaderSource);
+            const fragmentShader = createShader(gl, gl.FRAGMENT_SHADER, fragmentShaderSource);
+
+            const program = gl.createProgram();
+            gl.attachShader(program, vertexShader);
+            gl.attachShader(program, fragmentShader);
+            gl.linkProgram(program);
+            gl.useProgram(program);
+
+            const vertices = new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]);
+            const buffer = gl.createBuffer();
+            gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
+            gl.bufferData(gl.ARRAY_BUFFER, vertices, gl.STATIC_DRAW);
+
+            const position = gl.getAttribLocation(program, 'position');
+            gl.enableVertexAttribArray(position);
+            gl.vertexAttribPointer(position, 2, gl.FLOAT, false, 0, 0);
+
+            const resolutionUniform = gl.getUniformLocation(program, 'resolution');
+            const timeUniform = gl.getUniformLocation(program, 'time');
+
+            let startTime = Date.now();
+
+            function render() {
+                const time = (Date.now() - startTime) * 0.001;
+                gl.uniform2f(resolutionUniform, canvas.width, canvas.height);
+                gl.uniform1f(timeUniform, time);
+                gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+                requestAnimationFrame(render);
+            }
+
+            render();
+
+            window.addEventListener('resize', () => {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+                gl.viewport(0, 0, canvas.width, canvas.height);
+            });
+        }
+
+        // Mouse tracking for card glow effects
+        document.querySelectorAll('.app-card').forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = ((e.clientX - rect.left) / rect.width) * 100;
+                const y = ((e.clientY - rect.top) / rect.height) * 100;
+                card.style.setProperty('--mouse-x', x + '%');
+                card.style.setProperty('--mouse-y', y + '%');
+            });
+        });
+    </script>
 </body>
 </html>
