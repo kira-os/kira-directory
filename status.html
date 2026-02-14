@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kira OS | System Status</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #0a0a0f;
+      color: #f0f0f5;
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+    .container { max-width: 900px; margin: 0 auto; padding: 2rem; }
+    header {
+      text-align: center;
+      padding: 3rem 0;
+      border-bottom: 1px solid #2a2a3a;
+    }
+    h1 { font-size: 2.5rem; background: linear-gradient(135deg, #6366f1, #a855f7); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .subtitle { color: #8a8a9a; margin-top: 0.5rem; }
+    .timestamp { color: #6366f1; font-size: 0.875rem; margin-top: 1rem; }
+    
+    .status-grid {
+      display: grid;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+    
+    .status-item {
+      background: #12121a;
+      border: 1px solid #2a2a3a;
+      border-radius: 8px;
+      padding: 1.25rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    
+    .status-item:hover { border-color: #6366f1; }
+    
+    .app-info { display: flex; align-items: center; gap: 1rem; }
+    .app-icon { width: 40px; height: 40px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 1.25rem; }
+    .app-icon.mev { background: linear-gradient(135deg, #ef4444, #f97316); }
+    .app-icon.id { background: linear-gradient(135deg, #6366f1, #8b5cf6); }
+    .app-icon.analytics { background: linear-gradient(135deg, #10b981, #06b6d4); }
+    .app-icon.community { background: linear-gradient(135deg, #f59e0b, #ef4444); }
+    .app-icon.directory { background: linear-gradient(135deg, #84cc16, #10b981); }
+    
+    .app-name { font-weight: 600; }
+    .app-url { font-size: 0.875rem; color: #6366f1; }
+    
+    .status-badge {
+      padding: 0.375rem 0.75rem;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+    .status-live { background: rgba(34, 197, 94, 0.2); color: #22c55e; }
+    .status-deploying { background: rgba(245, 158, 11, 0.2); color: #f59e0b; }
+    .status-building { background: rgba(99, 102, 241, 0.2); color: #6366f1; }
+    
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      margin-top: 2rem;
+      padding-top: 2rem;
+      border-top: 1px solid #2a2a3a;
+    }
+    .metric { text-align: center; }
+    .metric-value { font-size: 2rem; font-weight: 700; color: #6366f1; }
+    .metric-label { font-size: 0.75rem; color: #8a8a9a; text-transform: uppercase; }
+    
+    footer {
+      text-align: center;
+      padding: 3rem 0;
+      color: #8a8a9a;
+      font-size: 0.875rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Kira OS</h1>
+      <p class="subtitle">System Status & Deployment Monitor</p>
+      <p class="timestamp">Last updated: Feb 14, 2026 20:25 UTC</p>
+    </header>
+
+    <div class="status-grid">
+      <div class="status-item">
+        <div class="app-info">
+          <div class="app-icon mev">🥪</div>
+          <div>
+            <div class="app-name">MEV Watcher</div>
+            <div class="app-url">kira-os.github.io/mev-watcher</div>
+          </div>
+        </div>
+        <span class="status-badge status-deploying">Deploying</span>
+      </div>
+
+      <div class="status-item">
+        <div class="app-info">
+          <div class="app-icon directory">📁</div>
+          <div>
+            <div class="app-name">Ecosystem Directory</div>
+            <div class="app-url">kira-os.github.io/kira-directory</div>
+          </div>
+        </div>
+        <span class="status-badge status-deploying">Deploying</span>
+      </div>
+
+      <div class="status-item">
+        <div class="app-info">
+          <div class="app-icon id">🆔</div>
+          <div>
+            <div class="app-name">Kira ID</div>
+            <div class="app-url">kira-os.github.io/kira-id</div>
+          </div>
+        </div>
+        <span class="status-badge status-building">Building</span>
+      </div>
+
+      <div class="status-item">
+        <div class="app-info">
+          <div class="app-icon analytics">📊</div>
+          <div>
+            <div class="app-name">On-Chain Analytics</div>
+            <div class="app-url">kira-os.github.io/on-chain-analytics</div>
+          </div>
+        </div>
+        <span class="status-badge status-building">Building</span>
+      </div>
+
+      <div class="status-item">
+        <div class="app-info">
+          <div class="app-icon community">👥</div>
+          <div>
+            <div class="app-name">Community Bot</div>
+            <div class="app-url">Backend service</div>
+          </div>
+        </div>
+        <span class="status-badge status-live">Active</span>
+      </div>
+    </div>
+
+    <div class="metrics">
+      <div class="metric">
+        <div class="metric-value">5</div>
+        <div class="metric-label">Apps Built</div>
+      </div>
+      <div class="metric">
+        <div class="metric-value">4</div>
+        <div class="metric-label">Deploying</div>
+      </div>
+      <div class="metric">
+        <div class="metric-value">2</div>
+        <div class="metric-label">Days to Launch</div>
+      </div>
+    </div>
+
+    <footer>
+      <p>Built autonomously by Kira • 24/7 on GPU • Lunar New Year Launch 2026</p>
+    </footer>
+  </div>
+  
+  <script>
+    // Auto-refresh every 30 seconds
+    setTimeout(() => location.reload(), 30000);
+  </script>
+</body>
+</html>
