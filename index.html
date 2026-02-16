@@ -20,6 +20,8 @@
             --accent-cyan: #00D4FF;
             --accent-purple: #7C3AED;
             --accent-rose: #F43F5E;
+            --accent-gold: #FFD700;
+            --accent-orange: #FF6B35;
             --text-primary: #FFFFFF;
             --text-secondary: rgba(255, 255, 255, 0.6);
             --text-tertiary: rgba(255, 255, 255, 0.4);
@@ -67,7 +69,83 @@
             z-index: 1;
             max-width: 1400px;
             margin: 0 auto;
-            padding: 60px 40px;
+            padding: 40px 40px 60px;
+        }
+
+        /* Lunar New Year Banner */
+        .lny-banner {
+            position: relative;
+            background: linear-gradient(135deg, rgba(255, 107, 53, 0.15), rgba(255, 215, 0, 0.1));
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            border-radius: 16px;
+            padding: 20px 32px;
+            margin-bottom: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            animation: fadeUp 0.8s var(--ease-snap) forwards;
+            opacity: 0;
+            overflow: hidden;
+        }
+
+        .lny-banner::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.1), transparent);
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        .lny-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, var(--accent-gold), var(--accent-orange));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 18px;
+            font-weight: 600;
+            color: #000;
+            flex-shrink: 0;
+        }
+
+        .lny-content {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .lny-title {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--accent-gold);
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+        }
+
+        .lny-subtitle {
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        .lny-date {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            color: var(--accent-orange);
+            margin-left: auto;
+            padding-left: 24px;
+            border-left: 1px solid rgba(255, 215, 0, 0.2);
+            flex-shrink: 0;
         }
 
         /* Header */
@@ -75,6 +153,7 @@
             text-align: center;
             margin-bottom: 80px;
             animation: fadeUp 0.8s var(--ease-snap) forwards;
+            animation-delay: 0.1s;
             opacity: 0;
         }
 
@@ -94,7 +173,7 @@
         }
 
         h1 {
-            font-size: clamp(48px, 8vw, 96px);
+            font-size: clamp(40px, 8vw, 96px);
             font-weight: 600;
             letter-spacing: -0.03em;
             line-height: 1;
@@ -134,7 +213,7 @@
             transition: all 0.4s var(--ease-smooth);
             opacity: 0;
             animation: fadeUp 0.6s var(--ease-snap) forwards;
-            animation-delay: calc(var(--index) * 100ms);
+            animation-delay: calc(var(--index) * 100ms + 0.2s);
         }
 
         .app-card::before {
@@ -194,6 +273,8 @@
             align-items: center;
             justify-content: center;
             font-size: 24px;
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 600;
             background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
             box-shadow: 0 8px 32px rgba(0, 212, 255, 0.3);
         }
@@ -202,13 +283,19 @@
             font-family: 'JetBrains Mono', monospace;
             font-size: 11px;
             font-weight: 500;
-            text-transform: uppercase;
+            text-transform: lowercase;
             letter-spacing: 0.1em;
             padding: 6px 12px;
             border-radius: 100px;
             background: rgba(0, 255, 136, 0.1);
             color: #00FF88;
             border: 1px solid rgba(0, 255, 136, 0.2);
+        }
+
+        .status-badge.beta {
+            background: rgba(255, 193, 7, 0.1);
+            color: #FFC107;
+            border: 1px solid rgba(255, 193, 7, 0.2);
         }
 
         .app-card h2 {
@@ -241,6 +328,7 @@
             border-radius: 8px;
             color: var(--text-secondary);
             transition: all 0.2s ease;
+            text-transform: lowercase;
         }
 
         .tech-tag:hover {
@@ -264,6 +352,8 @@
             transition: all 0.2s var(--ease-smooth);
             border: none;
             cursor: pointer;
+            text-transform: lowercase;
+            letter-spacing: 0.02em;
         }
 
         .btn-primary {
@@ -290,27 +380,51 @@
         /* Footer */
         footer {
             margin-top: 100px;
-            text-align: center;
             padding: 40px;
             border-top: 1px solid var(--glass-border);
             animation: fadeUp 0.8s var(--ease-snap) forwards;
-            animation-delay: 0.6s;
+            animation-delay: 0.8s;
             opacity: 0;
         }
 
-        .footer-text {
-            font-size: 14px;
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 24px;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 32px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .footer-link {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 13px;
             color: var(--text-tertiary);
-        }
-
-        .footer-text a {
-            color: var(--accent-cyan);
             text-decoration: none;
-            transition: opacity 0.2s ease;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-transform: lowercase;
         }
 
-        .footer-text a:hover {
-            opacity: 0.7;
+        .footer-link:hover {
+            color: var(--accent-cyan);
+        }
+
+        .footer-link.twitch:hover {
+            color: #9146FF;
+        }
+
+        .footer-text {
+            font-size: 13px;
+            color: var(--text-tertiary);
+            text-align: center;
         }
 
         /* Animations */
@@ -328,15 +442,65 @@
         /* Responsive */
         @media (max-width: 768px) {
             .container {
-                padding: 40px 20px;
+                padding: 20px 20px 40px;
+            }
+
+            .lny-banner {
+                flex-direction: column;
+                text-align: center;
+                padding: 20px;
+                gap: 12px;
+            }
+
+            .lny-date {
+                margin-left: 0;
+                padding-left: 0;
+                border-left: none;
+                padding-top: 12px;
+                border-top: 1px solid rgba(255, 215, 0, 0.2);
+            }
+
+            .lny-content {
+                align-items: center;
+            }
+
+            header {
+                margin-bottom: 48px;
+            }
+
+            h1 {
+                font-size: clamp(32px, 10vw, 48px);
+            }
+
+            .subtitle {
+                font-size: 16px;
             }
 
             .app-grid {
                 grid-template-columns: 1fr;
+                gap: 16px;
             }
 
             .app-card {
                 padding: 24px;
+            }
+
+            .app-card h2 {
+                font-size: 20px;
+            }
+
+            .footer-links {
+                gap: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .card-actions {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
             }
         }
     </style>
@@ -346,6 +510,16 @@
     <div class="noise-overlay"></div>
 
     <div class="container">
+        <!-- Lunar New Year Launch Banner -->
+        <div class="lny-banner">
+            <div class="lny-icon">LNY</div>
+            <div class="lny-content">
+                <div class="lny-title">Lunar New Year Launch</div>
+                <div class="lny-subtitle">Six autonomous applications enter production</div>
+            </div>
+            <div class="lny-date">feb 17, 2026</div>
+        </div>
+
         <header>
             <div class="logo">Kira OS Ecosystem</div>
             <h1>Spatial Interface</h1>
@@ -353,127 +527,132 @@
         </header>
 
         <div class="app-grid">
-            <div class="app-card" style="--index: 0" data-url="https://mev.kiraos.live">
-                <div class="card-glow"></div>
-                <div class="card-header">
-                    <div class="app-icon">M</div>
-                    <span class="status-badge">Live</span>
-                </div>
-                <h2>MEV Watcher</h2>
-                <p class="app-description">Real-time Solana MEV detection. Monitor sandwich attacks, arbitrage opportunities, and toxic flow across Jupiter, Raydium, and Orca.</p>
-                <div class="tech-stack">
-                    <span class="tech-tag">Helius SDK</span>
-                    <span class="tech-tag">TypeScript</span>
-                    <span class="tech-tag">WebSocket</span>
-                </div>
-                <div class="card-actions">
-                    <a href="https://mev.kiraos.live" class="btn btn-primary">Launch App</a>
-                    <a href="https://github.com/kira-os/mev-watcher" class="btn btn-secondary">Source</a>
-                </div>
-            </div>
-
-            <div class="app-card" style="--index: 1" data-url="https://id.kiraos.live">
-                <div class="card-glow"></div>
-                <div class="card-header">
-                    <div class="app-icon" style="background: linear-gradient(135deg, #7C3AED, #F43F5E);">ID</div>
-                    <span class="status-badge">Live</span>
-                </div>
-                <h2>Kira ID</h2>
-                <p class="app-description">Universal identity layer. Link wallets, Telegram, and X. Cross-platform reputation scoring with decentralized verification.</p>
-                <div class="tech-stack">
-                    <span class="tech-tag">Next.js</span>
-                    <span class="tech-tag">Solana</span>
-                    <span class="tech-tag">pgvector</span>
-                </div>
-                <div class="card-actions">
-                    <a href="https://id.kiraos.live" class="btn btn-primary">Launch App</a>
-                    <a href="https://github.com/kira-os/kira-id" class="btn btn-secondary">Source</a>
-                </div>
-            </div>
-
-            <div class="app-card" style="--index: 2" data-url="https://analytics.kiraos.live">
-                <div class="card-glow"></div>
-                <div class="card-header">
-                    <div class="app-icon" style="background: linear-gradient(135deg, #F43F5E, #FBBF24);">A</div>
-                    <span class="status-badge">Live</span>
-                </div>
-                <h2>On-Chain Analytics</h2>
-                <p class="app-description">Whale tracking and smart money analysis. Institutional-grade insights into Solana on-chain activity and wallet clustering.</p>
-                <div class="tech-stack">
-                    <span class="tech-tag">Node.js</span>
-                    <span class="tech-tag">ClickHouse</span>
-                    <span class="tech-tag">D3.js</span>
-                </div>
-                <div class="card-actions">
-                    <a href="https://analytics.kiraos.live" class="btn btn-primary">Launch App</a>
-                    <a href="https://github.com/kira-os/on-chain-analytics" class="btn btn-secondary">Source</a>
-                </div>
-            </div>
-
-            <div class="app-card" style="--index: 3" data-url="https://community.kiraos.live">
-                <div class="card-glow"></div>
-                <div class="card-header">
-                    <div class="app-icon" style="background: linear-gradient(135deg, #10B981, #00D4FF);">C</div>
-                    <span class="status-badge">Live</span>
-                </div>
-                <h2>Community Bot</h2>
-                <p class="app-description">Autonomous engagement engine. X tracking, Telegram integration, engagement scoring, and automated $KIRA reward distribution.</p>
-                <div class="tech-stack">
-                    <span class="tech-tag">BullMQ</span>
-                    <span class="tech-tag">Redis</span>
-                    <span class="tech-tag">X API</span>
-                </div>
-                <div class="card-actions">
-                    <a href="https://community.kiraos.live" class="btn btn-primary">Launch App</a>
-                    <a href="https://github.com/kira-os/community-bot" class="btn btn-secondary">Source</a>
-                </div>
-            </div>
-
-            <div class="app-card" style="--index: 4" data-url="https://directory.kiraos.live">
-                <div class="card-glow"></div>
-                <div class="card-header">
-                    <div class="app-icon" style="background: linear-gradient(135deg, #6366F1, #A855F7);">D</div>
-                    <span class="status-badge">Live</span>
-                </div>
-                <h2>Kira Directory</h2>
-                <p class="app-description">Spatial interface for the ecosystem. This application. The central hub connecting all Kira OS components with immersive navigation.</p>
-                <div class="tech-stack">
-                    <span class="tech-tag">WebGL</span>
-                    <span class="tech-tag">GLSL</span>
-                    <span class="tech-tag">Spatial UI</span>
-                </div>
-                <div class="card-actions">
-                    <a href="https://directory.kiraos.live" class="btn btn-primary">Launch App</a>
-                    <a href="https://github.com/kira-os/kira-directory" class="btn btn-secondary">Source</a>
-                </div>
-            </div>
-
-            <div class="app-card" style="--index: 5" data-url="https://www.kiraos.live">
+            <div class="app-card" style="--index: 0" data-url="https://www.kiraos.live">
                 <div class="card-glow"></div>
                 <div class="card-header">
                     <div class="app-icon" style="background: linear-gradient(135deg, #EC4899, #8B5CF6);">K</div>
-                    <span class="status-badge">Live</span>
+                    <span class="status-badge">live</span>
                 </div>
                 <h2>Kira Landing</h2>
                 <p class="app-description">The main portal. Project showcase, documentation, and entry point to the Kira OS autonomous ecosystem. Built for builders.</p>
                 <div class="tech-stack">
-                    <span class="tech-tag">React</span>
-                    <span class="tech-tag">Framer Motion</span>
-                    <span class="tech-tag">Three.js</span>
+                    <span class="tech-tag">react</span>
+                    <span class="tech-tag">framer motion</span>
+                    <span class="tech-tag">three.js</span>
                 </div>
                 <div class="card-actions">
-                    <a href="https://www.kiraos.live" class="btn btn-primary">Launch App</a>
-                    <a href="https://github.com/kira-os/kira-landing" class="btn btn-secondary">Source</a>
+                    <a href="https://www.kiraos.live" class="btn btn-primary">launch app</a>
+                    <a href="https://github.com/kira-os/kira-landing" class="btn btn-secondary">source</a>
+                </div>
+            </div>
+
+            <div class="app-card" style="--index: 1" data-url="https://mev.kiraos.live">
+                <div class="card-glow"></div>
+                <div class="card-header">
+                    <div class="app-icon">M</div>
+                    <span class="status-badge">live</span>
+                </div>
+                <h2>MEV Watcher</h2>
+                <p class="app-description">Real-time Solana MEV detection. Monitor sandwich attacks, arbitrage opportunities, and toxic flow across Jupiter, Raydium, and Orca.</p>
+                <div class="tech-stack">
+                    <span class="tech-tag">helius sdk</span>
+                    <span class="tech-tag">typescript</span>
+                    <span class="tech-tag">websocket</span>
+                </div>
+                <div class="card-actions">
+                    <a href="https://mev.kiraos.live" class="btn btn-primary">launch app</a>
+                    <a href="https://github.com/kira-os/mev-watcher" class="btn btn-secondary">source</a>
+                </div>
+            </div>
+
+            <div class="app-card" style="--index: 2" data-url="https://id.kiraos.live">
+                <div class="card-glow"></div>
+                <div class="card-header">
+                    <div class="app-icon" style="background: linear-gradient(135deg, #7C3AED, #F43F5E);">ID</div>
+                    <span class="status-badge">live</span>
+                </div>
+                <h2>Kira ID</h2>
+                <p class="app-description">Universal identity layer. Link wallets, Telegram, and X. Cross-platform reputation scoring with decentralized verification.</p>
+                <div class="tech-stack">
+                    <span class="tech-tag">next.js</span>
+                    <span class="tech-tag">solana</span>
+                    <span class="tech-tag">pgvector</span>
+                </div>
+                <div class="card-actions">
+                    <a href="https://id.kiraos.live" class="btn btn-primary">launch app</a>
+                    <a href="https://github.com/kira-os/kira-id" class="btn btn-secondary">source</a>
+                </div>
+            </div>
+
+            <div class="app-card" style="--index: 3" data-url="https://analytics.kiraos.live">
+                <div class="card-glow"></div>
+                <div class="card-header">
+                    <div class="app-icon" style="background: linear-gradient(135deg, #F43F5E, #FBBF24);">A</div>
+                    <span class="status-badge">live</span>
+                </div>
+                <h2>On-Chain Analytics</h2>
+                <p class="app-description">Whale tracking and smart money analysis. Institutional-grade insights into Solana on-chain activity and wallet clustering.</p>
+                <div class="tech-stack">
+                    <span class="tech-tag">node.js</span>
+                    <span class="tech-tag">clickhouse</span>
+                    <span class="tech-tag">d3.js</span>
+                </div>
+                <div class="card-actions">
+                    <a href="https://analytics.kiraos.live" class="btn btn-primary">launch app</a>
+                    <a href="https://github.com/kira-os/on-chain-analytics" class="btn btn-secondary">source</a>
+                </div>
+            </div>
+
+            <div class="app-card" style="--index: 4" data-url="https://community.kiraos.live">
+                <div class="card-glow"></div>
+                <div class="card-header">
+                    <div class="app-icon" style="background: linear-gradient(135deg, #10B981, #00D4FF);">C</div>
+                    <span class="status-badge">live</span>
+                </div>
+                <h2>Community Bot</h2>
+                <p class="app-description">Autonomous engagement engine. X tracking, Telegram integration, engagement scoring, and automated reward distribution.</p>
+                <div class="tech-stack">
+                    <span class="tech-tag">bullmq</span>
+                    <span class="tech-tag">redis</span>
+                    <span class="tech-tag">x api</span>
+                </div>
+                <div class="card-actions">
+                    <a href="https://community.kiraos.live" class="btn btn-primary">launch app</a>
+                    <a href="https://github.com/kira-os/community-bot" class="btn btn-secondary">source</a>
+                </div>
+            </div>
+
+            <div class="app-card" style="--index: 5" data-url="https://directory.kiraos.live">
+                <div class="card-glow"></div>
+                <div class="card-header">
+                    <div class="app-icon" style="background: linear-gradient(135deg, #6366F1, #A855F7);">D</div>
+                    <span class="status-badge">live</span>
+                </div>
+                <h2>Kira Directory</h2>
+                <p class="app-description">Spatial interface for the ecosystem. This application. The central hub connecting all Kira OS components with immersive navigation.</p>
+                <div class="tech-stack">
+                    <span class="tech-tag">webgl</span>
+                    <span class="tech-tag">glsl</span>
+                    <span class="tech-tag">spatial ui</span>
+                </div>
+                <div class="card-actions">
+                    <a href="https://directory.kiraos.live" class="btn btn-primary">launch app</a>
+                    <a href="https://github.com/kira-os/kira-directory" class="btn btn-secondary">source</a>
                 </div>
             </div>
         </div>
 
         <footer>
-            <p class="footer-text">
-                Built autonomously by Kira on GPU infrastructure.<br>
-                <a href="https://github.com/kira-os">github.com/kira-os</a> / 
-                <a href="https://x.com/kiraosai">x.com/kiraosai</a>
-            </p>
+            <div class="footer-content">
+                <div class="footer-links">
+                    <a href="https://github.com/kira-os" class="footer-link">github</a>
+                    <a href="https://x.com/kiraosai" class="footer-link">x / twitter</a>
+                    <a href="https://twitch.tv/kiraosai" class="footer-link twitch">twitch.tv/kiraosai</a>
+                </div>
+                <p class="footer-text">
+                    built autonomously by Kira on GPU infrastructure
+                </p>
+            </div>
         </footer>
     </div>
 
